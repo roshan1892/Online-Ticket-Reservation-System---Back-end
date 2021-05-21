@@ -1,0 +1,33 @@
+server:
+  port: ${SERVER_PORT:8092}
+
+host:
+  url: http://localhost:3000/
+
+Access-Control-Request-Method: GET, PUT, DELETE, POST
+
+spring:
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/trs}
+    username: ${DATASOURCE_USER:postgres}
+    password: ${DATASOURCE_PASSWORD:root}
+    testWhileIdle: true
+    validationQuery: SELECT
+    driver-class-name: org.postgresql.Driver
+  main:
+    allow-bean-definition-overriding: true
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        enable_lazy_load_no_trans: true
+  flyway:
+    enabled: true
+    out-of-order: true
+
+  profiles:
+    active: ${PROFILE:test}
